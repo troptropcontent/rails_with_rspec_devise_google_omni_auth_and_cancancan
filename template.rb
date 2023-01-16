@@ -2,6 +2,7 @@
 gem 'devise'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
+gem 'cancancan'
 inject_into_file 'Gemfile', after: 'group :development, :test do' do
   <<-RUBY
     gem 'rspec-rails'
@@ -85,4 +86,7 @@ after_bundle do
     '<%= link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), method: :post %><br />',
     '<%= button_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), method: :post, data: {turbo: :false} %><br />'
   )
+
+  # sets up cancancan
+  generate('cancan:ability')
 end
