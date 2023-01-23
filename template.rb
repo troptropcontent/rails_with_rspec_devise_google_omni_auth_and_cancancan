@@ -36,7 +36,7 @@ after_bundle do
   inject_into_file 'config/initializers/devise.rb', after: '# ==> OmniAuth' do
     <<-RUBY
 
-  config.omniauth :google_oauth2, Rails.application.credentials.google_oauth2.client_id, Rails.application.credentials.google_oauth2.client_secret
+  config.omniauth :google_oauth2, (ENV['GOOGLE_CLIENT_ID'] || Rails.application.credentials.google_oauth2.client_id), (ENV['GOOGLE_CLIENT_SECRET'] || Rails.application.credentials.google_oauth2.client_secret)
     RUBY
   end
 
